@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hearthstone Blocker</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="title">Hearthstone Blocker</div>
+    <button class="close-btn" onclick="window.api.closeWindow()">✕</button>
+  </div>
+
+  <div class="container">
+    <div class="status">
+      <div id="led-red" class="led red"></div>
+      <div id="led-green" class="led green on"></div>
+    </div>
+
+    <button id="skip-button" class="skip-btn">Skip</button>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

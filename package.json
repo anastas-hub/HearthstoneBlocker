@@ -1,0 +1,34 @@
+{
+  "name": "hearthstone-blocker",
+  "version": "1.0.0",
+  "main": "main.js",
+  "build": {
+    "appId": "com.yourdomain.hearthstoneblocker",
+    "productName": "Hearthstone Blocker",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "requireAdministrator",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  }
+}
