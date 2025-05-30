@@ -1,38 +1,42 @@
 {
-  "name": "hearthstone-blocker",
-  "version": "1.2.0",
+  "name": "hearthstoneblocker",
+  "version": "2.1.0",
+  "description": "Interface de suivi de phase Hearthstone avec LEDs et blocage pare-feu",
   "main": "main.js",
+  "author": "Bout2p1_Ograines",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
   "build": {
-    "appId": "com.yourdomain.hearthstoneblocker",
-    "productName": "Hearthstone Blocker",
-    "files": [
-      "**/*"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    },
+    "appId": "com.bout2p1ograines.hearthstoneblocker",
+    "productName": "HearthstoneBlocker",
     "win": {
-      "icon": "assets/icon.ico",
-      "requestedExecutionLevel": "requireAdministrator",
       "target": [
         "nsis",
         "portable"
-      ]
+      ],
+      "requestedExecutionLevel": "requireAdministrator",
+      "icon": "icon.ico"
     },
     "nsis": {
       "oneClick": false,
       "perMachine": true,
       "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "shortcutName": "HearthstoneBlocker",
+      "allowElevation": true
+    },
+    "directories": {
+      "output": "dist"
     }
   },
-  "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder"
-  },
   "devDependencies": {
-    "electron": "^36.3.2",
+    "electron": "^28.2.3",
     "electron-builder": "^26.0.12"
   }
 }

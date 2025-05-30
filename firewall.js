@@ -1,37 +1,34 @@
-const { execSync } = require('child_process');
-const path = require('path');
-const fs = require('fs');
-
-const configPath = path.join(__dirname, 'config.json');
-const hearthstonePath = `"C:\\Program Files (x86)\\Hearthstone\\Hearthstone.exe"`; // chemin par défaut
-
-function loadConfig() {
-  if (!fs.existsSync(configPath)) {
-    return { duration: 4 };
-  }
-  const content = fs.readFileSync(configPath);
-  return JSON.parse(content);
-}
+const { exec } = require('child_process');
 
 function blockFirewall() {
-  try {
-    execSync(`netsh advfirewall firewall add rule name="HearthstoneBlock" program=${hearthstonePath} dir=in action=block`);
-    execSync(`netsh advfirewall firewall add rule name="HearthstoneBlock" program=${hearthstonePath} dir=out action=block`);
-  } catch (err) {
-    console.error("Erreur blocage pare-feu :", err.message);
-  }
+  return new Promise((resolve, reject) => {
+    const cmd = 'netsh advfirewall firewall add rule name="BlockHearthstone" dir=out action=block program="C:\\Program Files (x86)\\Hearthstone\\Hearthstone.exe" enable=yes';
+    console.log("📛 Blocage de Hearthstone demandé...");
+    exec(cmd, (err, stdout, stderr) => {
+      if (err) {
+        console.error("❌ BLOCK ERROR:", stderr);
+        reject(stderr);
+      } else {
+        console.log("✅ BLOCK OK:", stdout);
+        resolve();
+      }
+    });
+  });
 }
 
 function unblockFirewall() {
-  try {
-    execSync(`netsh advfirewall firewall delete rule name="HearthstoneBlock"`);
-  } catch (err) {
-    console.error("Erreur déblocage pare-feu :", err.message);
-  }
+  const cmd = 'netsh advfirewall firewall delete rule name="BlockHearthstone"';
+  console.log("🔓 Déblocage de Hearthstone demandé...");
+  exec(cmd, (err, stdout, stderr) => {
+    if (err) {
+      console.error("❌ UNBLOCK ERROR:", stderr);
+    } else {
+      console.log("✅ UNBLOCK OK:", stdout);
+    }
+  });
 }
 
 module.exports = {
-  loadConfig,
   blockFirewall,
   unblockFirewall
 };

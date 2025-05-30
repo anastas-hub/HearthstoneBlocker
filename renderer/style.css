@@ -1,99 +1,129 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #121212;
+  padding: 0;
+  background-color: #181818 !important;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
-.header {
+.title-bar {
+  width: 100%;
+  height: 40px; /* ↑ Un peu plus haut pour bien loger la croix */
+  background: #232323;
+  color: #eee;
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: space-between;
+  padding: 0 12px;
+  user-select: none;
+  -webkit-app-region: drag;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 35px;
-  background-color: #222;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  -webkit-app-region: drag;
-  user-select: none;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  z-index: 1000;
+  z-index: 100;
 }
 
-.title {
-  -webkit-app-region: drag;
-  pointer-events: none;
+.title-bar .title {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 40px; /* ↑ Aligné à la hauteur de la barre */
 }
 
 .close-btn {
-  -webkit-app-region: no-drag;
-  background: none;
+  background: transparent;
   border: none;
-  color: white;
-  font-size: 18px;
+  color: #ccc;
+  font-size: 22px;         /* ↑ Plus gros, bien lisible */
   cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: color 0.2s, background 0.2s;
+  width: 32px;
+  height: 32px;
   padding: 0;
-  margin: 0;
+  margin: 0;               /* ← Plus de margin-left */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .close-btn:hover {
-  color: red;
+  color: #ff5252;
+  background: #181818;
 }
 
 .container {
-  padding-top: 40px; /* espace pour la barre de titre */
   text-align: center;
-  position: relative;
+  margin-top: 48px; /* ↑ Laisse la place à la barre titre plus haute */
+  padding: 18px 16px 12px 16px;
+  background: #181818;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 32px #0008;
   width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 170px;
 }
 
-.status {
+.leds {
+  margin: 22px 0 18px 0;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 18px;
 }
 
 .led {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
   border-radius: 50%;
-  opacity: 0.3;
-  transition: opacity 0.3s;
+  background-color: #444;
+  transition: background-color 0.3s, opacity 0.3s;
+  vertical-align: middle;
 }
 
-.led.on {
-  opacity: 1;
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
+.led.green {
   background-color: green;
 }
 
-.skip-btn {
-  padding: 10px 20px;
-  background-color: #1e88e5;
-  border: none;
-  color: white;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.led.green.red {
+  background-color: red;
 }
 
-.skip-btn:hover {
-  background-color: #1565c0;
+.led.orange {
+  background-color: #444;
+}
+
+button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px #0003;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 8px;
+}
+
+button:disabled {
+  background-color: #880000;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
 }
